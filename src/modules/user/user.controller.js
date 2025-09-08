@@ -17,6 +17,15 @@ export const userController = {
         }catch(err){
             return res.status(500).json({error: err.message})
         }
+    },
+
+    async me(req, res){
+        try{
+            const user = await userService.getCurrentUser(req.user.id)
+            return res.status(200).json(user)
+        }catch(err){
+            return res.status(500).json({error: err.message})
+        }
     }
 }
 

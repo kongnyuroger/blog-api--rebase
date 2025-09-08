@@ -1,4 +1,4 @@
-import { createUser, findUser } from "./user.model.js";
+import { createUser, findUser, getUser } from "./user.model.js";
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
@@ -36,7 +36,7 @@ export const userService = {
         }
 
         const token = jwt.sign(
-            { id: user.id, username: user.name },
+            { id: user.id, username: user.name , email: user.email},
             'my_secretkey',
             { expiresIn: '1h' }
         );
@@ -47,6 +47,11 @@ export const userService = {
         return result;
 
     },
+
+    async getCurrentUser(reqUser){
+        const user = await getUser(reqUser)
+        return user;
+    }
 
 }
 

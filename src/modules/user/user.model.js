@@ -11,3 +11,8 @@ import pool from "../../config/db.js";
         return result.rows[0]
     }
 
+    export async function getUser(currentUserId){
+            const result = await pool.query("select * from users where id = $1", [currentUserId])
+            return result.rows[0]
+        }
+

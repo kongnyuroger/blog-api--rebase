@@ -17,6 +17,15 @@ const postController = {
                 return res.status(500).json({error: err.message})
             }
         },
+
+        async update(req, res){
+            try{
+                const post = await postService.updatePosts(req.body , req.params.id)
+                return res.status(200).json(post)
+            }catch(err){
+                return res.status(500).json({error: err.message})
+            }
+        },
 }
 
 export default postController

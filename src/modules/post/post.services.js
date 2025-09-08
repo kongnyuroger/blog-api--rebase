@@ -19,8 +19,15 @@ const postService = {
         return result
     },
 
-    async updatePosts(reqQuery, id){
-        const result = await updatePosts(reqQuery, id)
+    async updatePosts(reqbody, id){
+         const result = await updatePosts(reqbody, id);
+         if(!result){
+            throw new Error("post not found")
+         }
+        if(!reqbody.title || !reqbody.content){
+            throw new Error('title or content is required')
+        }
+       
         return result
     },
 

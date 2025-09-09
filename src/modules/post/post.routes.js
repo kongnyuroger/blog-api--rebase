@@ -8,5 +8,6 @@ router.post('/', authenticateToken, postController.create);
 router.get('/', postController.list);
 router.put('/:id', authenticateToken, postController.update);
 router.get('/:id', authenticateToken, postController.getAPost);
+router.delete('/:id', authenticateToken, postController.delete);
 
 export default router

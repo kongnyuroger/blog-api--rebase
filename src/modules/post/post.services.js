@@ -1,4 +1,4 @@
-import { createPost, listPosts, updatePosts, getPost} from "./post.model.js"
+import { createPost, listPosts, updatePosts, getPost, deletePost} from "./post.model.js"
 
 
 const postService = {
@@ -37,6 +37,14 @@ const postService = {
             throw new Error("post not found")
          }
         return result
+    },
+
+    async deletePost(id){
+         const result = await deletePost(id);
+         if(!result){
+            throw new Error("post not found")
+         }
+        return {message: "successfuly deleted"}
     }
 
 

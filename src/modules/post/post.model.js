@@ -34,3 +34,9 @@ export async function updatePosts({title,content,}, id){
     return result.rows[0]
 }
 
+export async function deletePost(id){
+   await pool.query("DELETE FROM comments WHERE post_id = $1", [id]);
+    const result = await pool.query("DELETE FROM posts WHERE id = $1 RETURNING *", [id]);
+
+    return result
+}

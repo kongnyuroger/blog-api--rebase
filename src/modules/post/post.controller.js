@@ -35,6 +35,15 @@ const postController = {
                 return res.status(500).json({error: err.message})
             }
         },
+
+        async delete(req, res){
+            try{
+                const post = await postService.deletePost(req.params.id)
+                return res.status(200).json(post)
+            }catch(err){
+                return res.status(500).json({error: err.message})
+            }
+        },
 }
 
 export default postController

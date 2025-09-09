@@ -1,4 +1,4 @@
-import { createPost, listPosts, updatePosts } from "./post.model.js"
+import { createPost, listPosts, updatePosts, getPost} from "./post.model.js"
 
 
 const postService = {
@@ -30,6 +30,14 @@ const postService = {
        
         return result
     },
+
+    async getSinglePosts(id){
+         const result = await getPost(id);
+         if(!result){
+            throw new Error("post not found")
+         }
+        return result
+    }
 
 
 }

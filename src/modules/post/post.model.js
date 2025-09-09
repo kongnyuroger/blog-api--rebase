@@ -5,6 +5,15 @@ export async function createPost(title,content,user_id){
     return result.rows[0]
 }
 
+export async function getPost(id){
+    const result = await pool.query(`
+        select title, content, comment, comments.user_id 
+        from posts left join comments on posts.id = comments.post_id
+        where posts.id = $1
+        `,[id]);
+    return result.rows
+}
+
 export async function listPosts({limit, offset}){
     const result = await pool.query(`select * from posts order by 
                                 created_at limit $1 offset $2` ,
@@ -18,7 +27,7 @@ export async function updatePosts({title,content,}, id){
         `UPDATE posts 
          SET title = COALESCE($1, title), 
              content = COALESCE($2, content)
-         WHERE id = $3
+         WHERE post_id = $3
          RETURNING *`,
         [title || null, content || null, id]
     );

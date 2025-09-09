@@ -44,6 +44,17 @@ const postController = {
                 return res.status(500).json({error: err.message})
             }
         },
+
+        async postcomment(req, res){
+            try{
+                const post = await postService.createComment(req.body.comment, req.user.id, parseInt(req.params.id))
+                return res.status(200).json(post)
+            }catch(err){
+                return res.status(500).json({error: err.message})
+            }
+        },
+
+    
 }
 
 export default postController

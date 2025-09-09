@@ -38,7 +38,7 @@ export const userService = {
         const token = jwt.sign(
             { id: user.id, username: user.name , email: user.email},
             'my_secretkey',
-            { expiresIn: '1h' }
+            { expiresIn: '6h' }
         );
         const result = {
             message: 'Login successful', 

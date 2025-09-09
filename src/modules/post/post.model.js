@@ -14,6 +14,14 @@ export async function getPost(id){
     return result.rows
 }
 
+export async function findPost(id){
+    const result = await pool.query(`
+        select * from posts
+        where posts.id = $1
+        `,[id]);
+    return result.rows[0]
+}
+
 export async function listPosts({limit, offset}){
     const result = await pool.query(`select * from posts order by 
                                 created_at limit $1 offset $2` ,
@@ -40,3 +48,5 @@ export async function deletePost(id){
 
     return result
 }
+
+

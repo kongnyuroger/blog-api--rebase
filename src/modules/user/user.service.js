@@ -1,4 +1,4 @@
-import { createUser, findUser, getUser } from "./user.model.js";
+import { createUser, findUser, getUser, updateProfilePicture } from "./user.model.js";
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
@@ -51,7 +51,18 @@ export const userService = {
     async getCurrentUser(reqUser){
         const user = await getUser(reqUser)
         return user;
-    }
+    },
+
+    async uploadProfilePicture(userId, filePath) {
+        const user = await updateProfilePicture(userId, filePath);
+        if (!user) {
+            throw new Error("User not found");
+        }
+        return {
+            message: "Profile picture updated successfully",
+            user,
+        };
+    },
 
 }
 

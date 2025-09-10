@@ -16,3 +16,15 @@ import pool from "../../config/db.js";
             return result.rows[0]
         }
 
+    
+
+export async function updateProfilePicture(userId, filePath) {
+    const result = await pool.query(
+        `UPDATE users 
+         SET profile_picture = $1 
+         WHERE id = $2 
+         RETURNING id, name, email, profile_picture`,
+        [filePath, userId]
+    );
+    return result.rows[0];
+}

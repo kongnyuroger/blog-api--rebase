@@ -1,4 +1,4 @@
-import { createPost, listPosts, updatePosts, getPost, deletePost, findPost, insertComment} from "./post.model.js"
+import { createPost, listPosts, updatePosts, getPost, deletePost, findPost} from "./post.model.js"
 
 
 const postService = {
@@ -31,13 +31,13 @@ const postService = {
         return result
     },
 
-    async getSinglePosts(id){
-         const result = await getPost(id);
-         if(!result){
-            throw new Error("post not found")
-         }
-        return result
-    },
+    async getSinglePosts(id) {
+    const result = await getPost(id);
+    if (!result) {
+        throw new Error("Post not found");
+    }
+    return result;
+},
 
     async deletePost(id){
         const post = await findPost(id);
@@ -48,19 +48,7 @@ const postService = {
         return {message: "successfuly deleted", post: result}
     },
 
-    async createComment(comment, user_id, post_id){
-        const post = await findPost(post_id);
-         if(!post){
-            throw new Error("post not found")
-         }
-         if (!comment || comment.trim() === "") {
-            throw new Error("Comment cannot be empty");
-        }
-
-        const result = await insertComment(comment, user_id, post_id)
-        return result;
-    }
-
+    
 }
 
 export default postService;

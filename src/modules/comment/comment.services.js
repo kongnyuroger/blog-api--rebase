@@ -1,22 +1,26 @@
-import {findPost, insertComment} from "./post.model.js"
+import { insertComment, findComment, deleteComments} from "./comment.model.js"
 
 
-const postService = {
+const commentService = {
    
 
     async createComment(comment, user_id, post_id){
-        const post = await findPost(post_id);
-         if(!post){
-            throw new Error("post not found")
-         }
          if (!comment || comment.trim() === "") {
             throw new Error("Comment cannot be empty");
         }
 
         const result = await insertComment(comment, user_id, post_id)
         return result;
-    }
+    },
 
+     async removeComment(id){
+            const comment = await findComment(id);
+             if(!comment){
+                throw new Error("comment not found")
+             }
+             const result = await deleteComments(id);
+            return {message: "successfuly deleted", post: result}
+        },
 }
 
-export default postService;
+export default commentService;

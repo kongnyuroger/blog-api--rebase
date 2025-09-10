@@ -9,7 +9,8 @@ import DBinit from './config/dbinit.js';
 
 import indexRouter  from './routes/index.js';
 import usersRouter from  './modules/user/user.routes.js';
-import postsRouter from './modules/post/post.routes.js'
+import postsRouter from './modules/post/post.routes.js';
+import commentRouter from './modules/comment/comment.routes.js';
 
 
 
@@ -24,9 +25,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use('/', indexRouter);
+
 app.use('/auth', usersRouter);
 app.use('/posts',postsRouter)
+app.use('/comments', commentRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

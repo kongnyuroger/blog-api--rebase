@@ -5,14 +5,32 @@ export async function createPost(title,content,user_id){
     return result.rows[0]
 }
 
-export async function getPost(id){
-    const result = await pool.query(`
-        select title, content, comment, comments.user_id 
-        from posts left join comments on posts.id = comments.post_id
-        where posts.id = $1
-        `,[id]);
-    return result.rows
+export async function getPost(id) {
+    const result = await pool.query(
+        `
+        SELECT 
+            posts.id,
+            posts.title, 
+            posts.content,
+            COALESCE(
+                json_agg(
+                    json_build_object(
+                        'id', comments.id,
+                        'comment', comments.comment,
+                        'user_id', comments.user_id
+                    )
+                ) FILTER (WHERE comments.id IS NOT NULL), '[]'
+            ) AS comments
+        FROM posts
+        LEFT JOIN comments ON posts.id = comments.post_id
+        WHERE posts.id = $1
+        GROUP BY posts.id
+        `,
+        [id]
+    );
+    return result.rows[0]; // returns single object
 }
+
 
 export async function findPost(id){
     const result = await pool.query(`
@@ -46,7 +64,7 @@ export async function deletePost(id){
    await pool.query("DELETE FROM comments WHERE post_id = $1", [id]);
     const result = await pool.query("DELETE FROM posts WHERE id = $1 RETURNING *", [id]);
 
-    return result
+    return result.rows[0]
 }
 
 

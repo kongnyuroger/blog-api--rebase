@@ -45,7 +45,15 @@ const postController = {
             }
         },
 
-    
+    async search(req, res) {
+        try {
+        const result = await postService.search(req.query);
+        return res.status(200).json(result);
+        } catch (err) {
+        return res.status(500).json({ error: err.message || "Internal Server Error" });
+        }
+    }
+        
 }
 
 export default postController

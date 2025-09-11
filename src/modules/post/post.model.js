@@ -67,4 +67,19 @@ export async function deletePost(id){
     return result.rows[0]
 }
 
+export async function searchPosts(q,) {
+  const result = await pool.query(
+    `SELECT *
+     FROM posts
+     WHERE title ILIKE $1 OR content ILIKE $1
+     ORDER BY created_at DESC
+     `,
+    [`%${q}%`]
+
+  );
+  return result.rows;
+}
+
+
+
 

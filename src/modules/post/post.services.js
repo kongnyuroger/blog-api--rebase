@@ -1,4 +1,10 @@
-import { createPost, listPosts, updatePosts, getPost, deletePost, findPost} from "./post.model.js"
+import { createPost, 
+    listPosts, 
+    updatePosts, 
+    getPost, 
+    deletePost, 
+    findPost, 
+    searchPosts} from "./post.model.js"
 
 
 const postService = {
@@ -48,7 +54,18 @@ const postService = {
         return {message: "successfuly deleted", post: result}
     },
 
+    async search(reqQuery) {
+        const q = reqQuery.q
+        if (!q || q.trim() === "") {
+            throw new Error("Query 'q' is required for search");
+        }
     
+
+        const result = await searchPosts(q)
+
+        return { message: "success", result};
+        }
+
 }
 
 export default postService;

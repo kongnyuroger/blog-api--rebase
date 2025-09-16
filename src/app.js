@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser'
 import logger from 'morgan';
 import express from 'express';
 import DBinit from './config/dbinit.js';
+import cors from 'cors'
 
 
 import profileRouter  from './modules/user/profile.router.js';
@@ -11,7 +12,6 @@ import indexRouter  from './routes/index.js';
 import usersRouter from  './modules/user/user.routes.js';
 import postsRouter from './modules/post/post.routes.js';
 import commentRouter from './modules/comment/comment.routes.js';
-
 
 
 const app = express();
@@ -25,8 +25,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use("/uploads", express.static("uploads"));
 
+app.use("/uploads", express.static("uploads"));
+app.use('/',indexRouter)
 app.use('/profile_upload', profileRouter)
 app.use('/auth', usersRouter);
 app.use('/posts',postsRouter)

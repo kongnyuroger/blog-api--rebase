@@ -55,12 +55,12 @@ const postService = {
     },
 
     async search(reqQuery) {
-        const q = reqQuery.q
+        const q = reqQuery.q.trim()
         if (!q || q.trim() === "") {
             throw new Error("Query 'q' is required for search");
         }
     
-
+        console.log("search term", q)
         const result = await searchPosts(q)
 
         return { message: "success", result};

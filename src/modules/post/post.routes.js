@@ -6,10 +6,11 @@ const router = Router()
 
 router.post('/', authenticateToken, postController.create);
 router.get('/', postController.list);
+router.get('/search', postController.search);
 router.put('/:id', authenticateToken, postController.update);
 router.get('/:id', authenticateToken, postController.getAPost);
 router.delete('/:id', authenticateToken, postController.delete);
-router.get('/search', postController.search);
+
 
 
 

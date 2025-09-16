@@ -55,7 +55,7 @@ const postService = {
     },
 
     async search(reqQuery) {
-        const q = reqQuery.q.trim()
+        const q = reqQuery.q
         if (!q || q.trim() === "") {
             throw new Error("Query 'q' is required for search");
         }

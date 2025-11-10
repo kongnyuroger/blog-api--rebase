@@ -1,8 +1,8 @@
 import pool from "../../config/db.js";
 
  
-   export async function createUser({name, email, password}){
-        const result = await pool.query("insert into users (name,email,password) values($1,$2,$3) returning name, email", [name,email,password])
+   export async function createUser({username, email, password}){
+        const result = await pool.query("insert into users (name,email,password) values($1,$2,$3) returning name, email", [username,email,password])
         return result.rows[0]
     }
 

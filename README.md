@@ -4,7 +4,24 @@ A RESTful backend API built with **Node.js**, **Express**, and **PostgreSQL**.
 This project simulates a simple blogging platform where users can register, log in, create posts, add comments, and upload profile pictures.
 
 ---
+## Quick start
+1. clone project
+    ```bash
+   git https://github.com/kongnyuroger/blog-api--rebase.git
+   cd  blog-api--rebase
+   ```
+2. Install dependencies
+   ```bash
+   npm i
+   ```
+3. Run dev server
+   ```bash
+   npm run dev
+   ```
+3. Set up environment variables
+   - By default, the app expects the backend at `http://localhost:5000`.
 
+   ---
 ## 🚀 Features
 - User authentication (register, login)
 - Profile picture upload
@@ -27,9 +44,9 @@ This project simulates a simple blogging platform where users can register, log 
 API Endpoints
 Authentication
 
-POST /auth/register – Register new user
+POST /auth/register – Register new user(username, email, password)
 
-POST /auth/login – Login user
+POST /auth/login – Login user(email, password)
 
 GET /me – Get logged-in user info
 
@@ -43,9 +60,9 @@ GET /posts?limit=10&offset=0 – List posts (with pagination)
 
 GET /posts/:id – Get single post with comments
 
-POST /posts – Create post
+POST /posts – Create post (title, content)
 
-PUT /posts/:id – Update post
+PUT /posts/:id – Update post (titiel, content)
 
 DELETE /posts/:id – Delete post and its comments
 
@@ -53,7 +70,7 @@ Comments
 
 GET /posts/:id/comments – List comments for a post
 
-POST /posts/:id/comments – Add comment to a post
+POST /posts/:id/comments – Add comment to a post(content)
 
 DELETE /comments/:id – Delete comment
 

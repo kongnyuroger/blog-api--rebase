@@ -41,8 +41,8 @@ export async function findPost(id){
 }
 
 export async function listPosts({limit, offset}){
-    const result = await pool.query(`select * from posts order by 
-                                created_at limit $1 offset $2` ,
+    const result = await pool.query(`select * from posts limit $1 offset $2 order by 
+                                created_at` ,
                                 [limit, offset]
                                 );
     return result.rows
@@ -67,7 +67,7 @@ export async function deletePost(id){
     return result.rows[0]
 }
 
-export async function searchPosts(q,) {
+export async function searchPosts(q) {
   const result = await pool.query(
     `SELECT *
      FROM posts

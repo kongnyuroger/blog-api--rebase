@@ -68,12 +68,12 @@ DELETE /posts/:id – Delete post and its comments
 
 Comments
 
-GET /posts/:id/comments – List comments for a post
 
-POST /posts/:id/comments – Add comment to a post(content)
+
+POST comments/posts/:id – Add comment to a post(comment)
 
 DELETE /comments/:id – Delete comment
 
 Search
 
-GET /search?q=keyword – Search posts by title or content
+GET posts/search?q=keyword – Search posts by title or content

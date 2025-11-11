@@ -4,8 +4,8 @@ import jwt from 'jsonwebtoken'
 
 export const userService = {
     async createUser(reqbody){
-        if (!reqbody.name || !reqbody.password || !reqbody.email) {
-            throw new Error( 'name , password and email required' );
+        if (!reqbody.username || !reqbody.password || !reqbody.email) {
+            throw new Error( 'username , password and email required' );
         }
         const userExist = await findUser(reqbody.email)
         if(userExist){

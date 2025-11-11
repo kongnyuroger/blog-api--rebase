@@ -41,8 +41,8 @@ export async function findPost(id){
 }
 
 export async function listPosts({limit, offset}){
-    const result = await pool.query(`select * from posts limit $1 offset $2 order by 
-                                created_at` ,
+    const result = await pool.query(`SELECT * FROM posts ORDER BY created_at LIMIT $1 OFFSET $2;
+` ,
                                 [limit, offset]
                                 );
     return result.rows

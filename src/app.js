@@ -3,16 +3,21 @@ import path from 'path'
 import cookieParser from 'cookie-parser'
 import logger from 'morgan';
 import express from 'express';
+import DBinit from './config/dbinit.js';
+import cors from 'cors'
 
 
-
+import profileRouter  from './modules/user/profile.router.js';
 import indexRouter  from './routes/index.js';
-import usersRouter from  './routes/users.js';
+import usersRouter from  './modules/user/user.routes.js';
+import postsRouter from './modules/post/post.routes.js';
+import commentRouter from './modules/comment/comment.routes.js';
+
 
 const app = express();
 
 // view engine setup
-
+DBinit()
 app.set('view engine', 'jade');
 
 app.use(logger('dev'));
@@ -20,8 +25,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+
+app.use("/uploads", express.static("uploads"));
+app.use('/',indexRouter)
+app.use('/profile_upload', profileRouter)
+app.use('/auth', usersRouter);
+app.use('/posts',postsRouter)
+app.use('/comments', commentRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -29,14 +39,10 @@ app.use(function(req, res, next) {
 });
 
 // error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 5000);
-  res.render('error');
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(err.status || 500).json({
+    error: err.message || "Internal Server Error",
+  });
 });
-
 export default app;

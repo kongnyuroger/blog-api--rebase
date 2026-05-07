@@ -20,6 +20,7 @@ This project simulates a simple blogging platform where users can register, log 
    ```
 3. Set up environment variables
    - By default, the app expects the backend at `http://localhost:5000`.
+   - Deployment url : 'https://blog-api-rebase.onrender.com'
 
    ---
 ## 🚀 Features

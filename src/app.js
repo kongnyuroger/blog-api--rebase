@@ -8,7 +8,7 @@ import cors from 'cors'
 
 
 import profileRouter  from './modules/user/profile.router.js';
-import indexRouter  from './routes/index.js';
+
 import usersRouter from  './modules/user/user.routes.js';
 import postsRouter from './modules/post/post.routes.js';
 import commentRouter from './modules/comment/comment.routes.js';
@@ -27,7 +27,9 @@ app.use(cookieParser());
 
 
 app.use("/uploads", express.static("uploads"));
-app.use('/',indexRouter)
+app.get('/', (req, res) => {
+  res.status(200).json({ status: 'ok', message: 'Blog API is running' });
+});
 app.use('/profile_upload', profileRouter)
 app.use('/auth', usersRouter);
 app.use('/posts',postsRouter)

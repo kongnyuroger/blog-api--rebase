@@ -5,15 +5,27 @@
   "type": "module",
   "scripts": {
     "start": "node ./src/bin/www",
-    "dev": "nodemon ./src/bin/www"
+    "dev": "nodemon ./src/bin/www",
+    "test": "node --test --test-reporter=spec tests/api.test.js"
   },
   "dependencies": {
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "express": "^4.21.2",
-    "http-errors": "~1.6.3",
-    "jade": "^1.9.2",
+    "bcrypt": "^6.0.0",
+    "cookie-parser": "~1.4.7",
+    "cors": "^2.8.5",
+    "debug": "~4.4.1",
+    "express": "^5.1.0",
+    "express-rate-limit": "^7.5.0",
+    "http-errors": "~2.0.0",
+    "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.1",
-    "nodemon": "^3.1.10"
+    "multer": "^2.0.2",
+    "nodemon": "^3.1.10",
+    "pg": "^8.16.3"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "jest": {
+    "transform": {}
   }
 }

@@ -16,7 +16,7 @@ export async function getPost(id) {
                 json_agg(
                     json_build_object(
                         'id', comments.id,
-                        'comment', comments.comment,
+                        'comment', comments.content,
                         'user_id', comments.user_id
                     )
                 ) FILTER (WHERE comments.id IS NOT NULL), '[]'
@@ -53,7 +53,7 @@ export async function updatePosts({title,content,}, id){
         `UPDATE posts 
          SET title = COALESCE($1, title), 
              content = COALESCE($2, content)
-         WHERE post_id = $3
+         WHERE id = $3
          RETURNING *`,
         [title || null, content || null, id]
     );

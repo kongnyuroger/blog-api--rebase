@@ -12,7 +12,7 @@ import pool from "../../config/db.js";
     }
 
     export async function getUser(currentUserId){
-            const result = await pool.query("select * from users where id = $1", [currentUserId])
+            const result = await pool.query("select id, name, email, created_at from users where id = $1", [currentUserId])
             return result.rows[0]
         }
 
